@@ -1,3 +1,7 @@
+<hr>
+
+<p align="center"><img src="assets/yocrow-logo.svg" alt="Yocrow" width="320"></p>
+
 # Yocrow agent skills
 
 Agent skills that teach AI coding agents how to use [Yocrow](https://yocrow.dev),
