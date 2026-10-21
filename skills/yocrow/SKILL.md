@@ -16,6 +16,7 @@ license: MIT
 - Get every `action_ref` from discovery in this session. Discover again if one is rejected.
 - Prefer `read` actions. Use `write` or `destructive` only for changes the user asked for.
 - On `confirmation_required` or a declined prompt, tell the user and do not retry.
+- Run `write` and `destructive` actions one at a time. Wait for each approval prompt to finish before starting the next, because parallel prompts race and one can be denied.
 - Never ask for tokens, passwords or Companion Keys in chat.
 - No results for a provider means it is not connected. Ask the user to run `yocrow connect <provider>`.
 - If nothing works, ask the user to run `yocrow status` and, if needed, `yocrow login`.
