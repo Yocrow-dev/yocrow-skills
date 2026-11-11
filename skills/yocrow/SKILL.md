@@ -1,7 +1,7 @@
 ---
 name: yocrow
 description: >-
-  Use the Yocrow MCP tools discover_actions, inspect_action and run_action to
+  Use the Yocrow MCP tools find_actions, run_read_action and run_write_action to
   work with the user's connected providers such as GitHub, Linear, Notion, Neon,
   Supabase, PostHog, Datadog and Resend.
 license: MIT
@@ -9,14 +9,15 @@ license: MIT
 
 # Yocrow
 
-1. `discover_actions` with a short task `query`, for example `"search pull requests"`.
-2. `inspect_action` with the chosen `action_ref` to read its `input_schema`.
-3. `run_action` with that `action_ref` and `arguments` matching the schema.
+1. `find_actions` returns action names, tags and input schemas.
+2. `run_read_action` runs `[read]` actions.
+3. `run_write_action` runs `[write]` and `[destructive]` actions.
 
-- Get every `action_ref` from discovery in this session. Discover again if one is rejected.
-- Prefer `read` actions. Use `write` or `destructive` only for changes the user asked for.
-- On `confirmation_required` or a declined prompt, tell the user and do not retry.
-- Run `write` and `destructive` actions one at a time. Wait for each approval prompt to finish before starting the next, because parallel prompts race and one can be denied.
+- Names like `linear_save_issue` are stable across turns and sessions. Reuse a name you already know and skip `find_actions`.
+- Search every provider you need in one `find_actions` call with `searches`, one entry per provider.
+- Batch independent calls with `calls` only when they touch at least 2 providers. Never mix reads and writes in one batch. Run dependent calls in order.
+- Prefer read actions. Run writes only for changes the user asked for.
+- Yocrow shows no prompts. The editor asks before `run_write_action` if the user set it to ask. If the user declines, do not retry.
 - Never ask for tokens, passwords or Companion Keys in chat.
-- No results for a provider means it is not connected. Ask the user to run `yocrow connect <provider>`.
+- `provider not connected` means the user must run `yocrow connect <provider>`.
 - If nothing works, ask the user to run `yocrow status` and, if needed, `yocrow login`.
