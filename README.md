@@ -9,7 +9,7 @@ which connects your agent to the official MCP servers of the providers you use.
 
 | Skill | What it teaches |
 | --- | --- |
-| [`yocrow`](skills/yocrow/SKILL.md) | Finding, inspecting and running provider actions through the three Yocrow tools |
+| [`yocrow`](skills/yocrow/SKILL.md) | Finding and running provider actions through the three Yocrow tools |
 
 ## Install
 
